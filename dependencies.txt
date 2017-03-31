@@ -1,1 +1,16 @@
+BORROWER
 borrower_id --> last_name, first_name, category_name
+phone --> borrower_id
+borrower_id -->> phone
+
+CATEGORY
+category_name --> checkout_period, max_books_out
+
+FINE
+borrower_id, title, date_due --> date_returned, amount
+
+BOOK
+call_number, copy_number --> bar_code
+bar_code --> call_number, copy_number
+call_number --> title, format, author
+call_number -->> author, keyword
