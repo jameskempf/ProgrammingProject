@@ -256,10 +256,10 @@ return new Date(calendar.getTime().getTime());
      *  @param format the format of the book
      *  @param keywords the keywords of the book (a List whose elements are strings
      *                 corresponding to the various keywords)
-     *  // Note that the copy number and accession number are not passed as
+     *  // Note that the copy number and bar code are not passed as
      *  // parameters.  The copy number will be 1 if there is no existing
      *  // book of this call number - else 1 more than the highest existing
-     *  // number.  The accession number will be generated automatically
+     *  // number.  The bar code will be generated automatically
      *
      *  @exception an ErrorMessage is thrown with an appropriate message if
      *          the operation fails.  Any failure results in no changes being
@@ -562,18 +562,18 @@ return new Date(calendar.getTime().getTime());
 
         try
         {
-            short accessionNumber = 0;
+            short barCode = 0;
             String title = null, format = null;
             
-            #sql { select accession_number, title, format
-                    into :accessionNumber, :title, :format
+            #sql { select bar_code, title, format
+                    into :barCode, :title, :format
                     from Book join Book_info
                         on Book.call_number = Book_info.call_number
                     where Book.call_number = :callNumber and
                           Book.copy_number = :copyNumber
                  };
                  
-            values[2] = "" + accessionNumber;
+            values[2] = "" + barCode;
             values[3] = title;
             values[5] = format;
             
@@ -1080,7 +1080,7 @@ System.out.println("payFine() " + borrowerID + " " + fine.getAmountDue() + " cal
         }
     }
 
-    /** Produce a list of all copies of books - accession number, call number,
+    /** Produce a list of all copies of books - bar code, call number,
      *  copy number and title
      *
      *  @param stream the stream to which to print the report
@@ -1351,8 +1351,8 @@ stream.println("Overdue Books report");
     private static final String BOOK_AUTHOR_TABLE_NAME = "BOOK_AUTHOR";
     
     private static final String DRIVER_NAME = "com.ibm.db2.jcc.DB2Driver";
-    private static final String DATABASE_URL = 
-        "jdbc:db2://joshua.cs.gordon.edu:50000/project";
+    private static final String DATABASE_URL =
+    	"jdbc:db2://joshua.cs.gordon.edu:50000/project";
 
     // For testing purposes only - display an array of values for fields that
     // are parameters to a method

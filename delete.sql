@@ -1,0 +1,9 @@
+drop table Category;
+drop table Borrower;
+drop table Borrower_phone;
+drop table Book_info;
+drop table Book;
+drop table Book_author;
+drop table Book_keyword;
+drop table Checked_out;
+drop table Fine;
